@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debojyoti Ghosh — AI Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+/* ══════════════════════════════════════
+   PER-PAGE COLOUR THEMES (light bg)
+══════════════════════════════════════ */
+body[data-page="home"]{
+  --bg:#f4f2ff;--bg2:#ebe8ff;--surf:#fff;--brd:#d4cff5;
+  --acc:#4f46e5;--acc2:#7c72f0;--acl:#eef0ff;
+  --txt:#18152e;--mut:#5c5880;--fnt:#a09cb8;
+  --hfr:#ddd6fe;--hto:#f4f2ff;--tag:#ede9ff;--tagt:#4f46e5;
+}
+body[data-page="about"]{
+  --bg:#f0f8fd;--bg2:#e2f2fa;--surf:#fff;--brd:#b8d8ec;
+  --acc:#0284c7;--acc2:#0ea5e9;--acl:#e0f2fe;
+  --txt:#0a1a28;--mut:#3a5c70;--fnt:#88b0c4;
+  --hfr:#bae6fd;--hto:#f0f8fd;--tag:#e0f2fe;--tagt:#0284c7;
+}
+body[data-page="research"]{
+  --bg:#fffbf0;--bg2:#fef4d0;--surf:#fff;--brd:#eed880;
+  --acc:#b45309;--acc2:#d97706;--acl:#fef3c7;
+  --txt:#1c1208;--mut:#6b5228;--fnt:#c4a870;
+  --hfr:#fde68a;--hto:#fffbf0;--tag:#fef3c7;--tagt:#b45309;
+}
+body[data-page="skills"]{
+  --bg:#f0faf4;--bg2:#ddf2e6;--surf:#fff;--brd:#a8d8bc;
+  --acc:#059669;--acc2:#10b981;--acl:#d1fae5;
+  --txt:#081e12;--mut:#2e5c40;--fnt:#7ab898;
+  --hfr:#a7f3d0;--hto:#f0faf4;--tag:#d1fae5;--tagt:#059669;
+}
+body[data-page="achievements"]{
+  --bg:#fdf3f8;--bg2:#f8e2ee;--surf:#fff;--brd:#e0b0cc;
+  --acc:#be185d;--acc2:#db2777;--acl:#fce7f3;
+  --txt:#1c0812;--mut:#6a2040;--fnt:#c080a0;
+  --hfr:#fbcfe8;--hto:#fdf3f8;--tag:#fce7f3;--tagt:#be185d;
+}
+body[data-page="contact"]{
+  --bg:#f7f3ff;--bg2:#ece6ff;--surf:#fff;--brd:#c8b8f0;
+  --acc:#7c3aed;--acc2:#8b5cf6;--acl:#ede9ff;
+  --txt:#100820;--mut:#402870;--fnt:#9880c8;
+  --hfr:#ddd6fe;--hto:#f7f3ff;--tag:#ede9ff;--tagt:#7c3aed;
+}
+
+body{
+  background:var(--bg,#f4f2ff);color:var(--txt,#18152e);
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;
+  min-height:100vh;overflow-x:hidden;
+  transition:background-color 0.5s,color 0.4s;
+}
+
+/* ══ NAV ══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:62px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--brd);
+  box-shadow:0 1px 24px rgba(0,0,0,0.06);
+  transition:border-color 0.5s;
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;
+  color:var(--acc);cursor:pointer;transition:color 0.4s;
+  display:flex;align-items:center;gap:0.7rem;
+}
+.nav-logo img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--acc);}
+.nav-links{display:flex;gap:0.1rem;list-style:none;}
+.nav-links a{
+  font-size:0.76rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--mut);text-decoration:none;padding:0.38rem 0.82rem;
+  border-radius:2rem;cursor:pointer;transition:all 0.25s;
+}
+.nav-links a:hover{background:var(--acl);color:var(--acc);}
+.nav-links a.active{background:var(--acc);color:#fff;}
+
+/* ══ PAGE SYSTEM ══ */
+.page{display:none;min-height:100vh;padding-top:62px;animation:fadeUp 0.4s ease;}
+.page.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ SHARED LAYOUT ══ */
+.wrap{max-width:1080px;margin:0 auto;padding:4.5rem 2.5rem;}
+.page-hero{
+  padding:4rem 2.5rem 3rem;
+  background:linear-gradient(140deg,var(--hfr) 0%,var(--hto) 60%);
+  transition:background 0.5s;
+}
+.page-hero-inner{max-width:1080px;margin:0 auto;}
+
+.lbl{
+  font-family:'JetBrains Mono',monospace;font-size:0.69rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--acc);
+  display:flex;align-items:center;gap:0.75rem;margin-bottom:0.7rem;transition:color 0.4s;
+}
+.lbl::before{content:'';width:28px;height:2px;background:var(--acc);border-radius:2px;transition:background 0.4s;}
+.htitle{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,2.8rem);
+  font-weight:700;color:var(--txt);line-height:1.15;margin-bottom:0.5rem;transition:color 0.4s;
+}
+.hsub{font-size:1rem;color:var(--mut);line-height:1.7;max-width:600px;transition:color 0.4s;}
+
+.card{
+  background:var(--surf);border:1px solid var(--brd);border-radius:14px;padding:1.8rem 2rem;
+  transition:border-color 0.4s,box-shadow 0.25s,background 0.4s;
+}
+.card:hover{border-color:var(--acc2);box-shadow:0 4px 24px rgba(0,0,0,0.07);}
+.info-pair{
+  display:flex;justify-content:space-between;padding:0.6rem 0;
+  border-bottom:1px solid var(--brd);font-size:0.87rem;transition:border-color 0.4s;
+}
+.info-pair:last-child{border-bottom:none;}
+.ikey{font-size:0.69rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--fnt);transition:color 0.4s;}
+.ival{color:var(--mut);transition:color 0.4s;}
+
+
+.hero-links{
+  margin-top:1rem;
+  display:flex;
+  gap:0.7rem;
+  flex-wrap:wrap;
+}
+
+/* smaller version of clink */
+.clink.small{
+  padding:0.55rem 0.8rem;
+  border-radius:10px;
+  gap:0.6rem;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(6px);
+}
+
+/* smaller icon */
+.clink.small .cl-ico{
+  width:28px;
+  height:28px;
+  font-size:0.9rem;
+}
+
+/* smaller text */
+.clink.small .cl-lbl{
+  font-size:0.6rem;
+}
+
+.clink.small .cl-val{
+  font-size:0.78rem;
+}
+/* ══════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════ */
+.home-root{
+  position:relative;
+  min-height:calc(100vh - 62px);
+  background:linear-gradient(135deg,#f0edff 0%,#e8f4ff 35%,#edfff6 65%,#fffde8 100%);
+  overflow:hidden;
+  display:flex;align-items:center;
+}
+
+/* ── Animated background SVG ── */
+.home-bg{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:1;overflow:hidden;
+}
+.home-bg svg{position:absolute;top:0;left:0;width:100%;height:100%;}
+
+/* Float keyframes */
+@keyframes fS{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes fM{0%,100%{transform:translateY(0)}33%{transform:translateY(-10px)}66%{transform:translateY(7px)}}
+@keyframes fF{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+.fs{animation:fS 8s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+.fm{animation:fM 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+.ff{animation:fF 3.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+.g-nn{animation-delay:0s;}
+.g-cv{animation-delay:-1.8s;}
+.g-eq1{animation-delay:-3s;}
+.g-eq2{animation-delay:-1s;}
+.g-kg{animation-delay:-4s;}
+.g-sc{animation-delay:-2.2s;}
+.g-attn{animation-delay:-0.5s;}
+.g-lc{animation-delay:-2.7s;}
+
+/* ── Layout: left photo + right text ── */
+.home-layout{
+  position:relative;z-index:10;
+  max-width:1180px;margin:0 auto;padding:3rem 2.5rem;
+  display:grid;grid-template-columns:300px 1fr;
+  gap:4rem;align-items:center;width:100%;
+}
+
+/* ── LEFT: photo card ── */
+.home-left{display:flex;flex-direction:column;align-items:center;gap:1.6rem;}
+
+.photo-wrap{
+  position:relative;display:flex;flex-direction:column;align-items:center;
+}
+.photo-halo{
+  position:absolute;width:360px;height:450px;border-radius:20px;
+  background:radial-gradient(ellipse,rgba(79,70,229,0.16) 0%,rgba(2,132,199,0.09) 50%,transparent 80%);
+  top:10px;left:50%;transform:translateX(-50%);
+  animation:fS 7s ease-in-out infinite;z-index:0;
+}
+.photo-box{
+  width:320px;height:420px;border-radius:18px;overflow:hidden;
+  border:3px solid rgba(255,255,255,0.95);
+  box-shadow:0 0 0 1px rgba(79,70,229,0.18),0 24px 70px rgba(79,70,229,0.18),0 8px 24px rgba(0,0,0,0.12);
+  position:relative;z-index:2;
+  background:linear-gradient(145deg,#eef0ff,#e0f2fe);
+}
+.photo-box img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+}
+.photo-fallback{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;
+  background:linear-gradient(135deg,#4f46e5,#0284c7,#059669);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.photo-badge{
+  margin-top:1rem;position:relative;z-index:3;
+  display:inline-flex;align-items:center;gap:0.45rem;
+  background:rgba(255,255,255,0.95);border:1px solid #c7d2fe;border-radius:2rem;
+  padding:0.4rem 1.1rem;font-size:0.71rem;font-weight:700;
+  letter-spacing:0.07em;text-transform:uppercase;color:#4f46e5;
+  box-shadow:0 2px 14px rgba(79,70,229,0.14);
+}
+.pulse{
+  width:7px;height:7px;border-radius:50%;background:#22c55e;
+  animation:pulse-g 2s ease-in-out infinite;
+}
+@keyframes pulse-g{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.55)}50%{box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+
+/* stat pills grid */
+.pills{display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;width:100%;}
+.pill{
+  border-radius:12px;padding:0.85rem 0.7rem;text-align:center;
+  border:1px solid;transition:transform 0.2s,box-shadow 0.2s;
+}
+.pill:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.1);}
+.pn{display:block;font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;line-height:1;}
+.pl{display:block;font-size:0.63rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.2rem;opacity:0.7;}
+.pi{background:#eef0ff;border-color:#c7d2fe;color:#4f46e5;}
+.pb{background:#e0f2fe;border-color:#bae6fd;color:#0284c7;}
+.pp{background:#fce7f3;border-color:#fbcfe8;color:#be185d;}
+.pg{background:#d1fae5;border-color:#a7f3d0;color:#059669;}
+
+/* domain tags */
+.dtags{display:flex;flex-wrap:wrap;gap:0.42rem;justify-content:center;width:100%;}
+.dt{
+  font-size:0.69rem;font-weight:600;padding:0.28rem 0.75rem;
+  border-radius:2rem;border:1px solid;letter-spacing:0.03em;
+}
+.dt-ml{background:#eef0ff;border-color:#c7d2fe;color:#4f46e5;}
+.dt-cv{background:#e0f2fe;border-color:#bae6fd;color:#0284c7;}
+.dt-dl{background:#ede9ff;border-color:#ddd6fe;color:#7c3aed;}
+.dt-kg{background:#fef3c7;border-color:#fde68a;color:#b45309;}
+.dt-sc{background:#d1fae5;border-color:#a7f3d0;color:#059669;}
+
+/* ── RIGHT: text ── */
+.home-right{display:flex;flex-direction:column;}
+
+.eyebrow{
+  display:flex;align-items:center;gap:0.8rem;margin-bottom:1.2rem;
+  animation:fromLeft 0.7s ease both;
+}
+.ebline{width:36px;height:2px;background:linear-gradient(90deg,#4f46e5,#0284c7);border-radius:2px;flex-shrink:0;}
+.ebtext{
+  font-family:'JetBrains Mono',monospace;font-size:0.71rem;
+  letter-spacing:0.15em;text-transform:uppercase;color:#4f46e5;
+}
+.hname{
+  font-family:'Cormorant Garamond',serif;
+  line-height:0.95;margin-bottom:0.8rem;
+  animation:fromLeft 0.7s 0.1s ease both;
+}
+.nfirst{
+  display:block;font-size:clamp(2.6rem,5vw,4.2rem);font-weight:400;
+  color:#2d2460;letter-spacing:-0.02em;
+}
+.nlast{
+  display:block;font-size:clamp(3.2rem,6.5vw,5.8rem);font-weight:700;font-style:italic;
+  background:linear-gradient(135deg,#4f46e5 0%,#0284c7 50%,#059669 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-0.03em;
+}
+.htagline{
+  font-size:1rem;font-weight:600;color:#6b6358;letter-spacing:0.04em;
+  margin-bottom:1.4rem;animation:fromLeft 0.7s 0.2s ease both;
+}
+.hbio{
+  font-size:1.02rem;line-height:1.85;color:#4a4540;max-width:520px;
+  margin-bottom:1.8rem;animation:fromLeft 0.7s 0.3s ease both;
+}
+.hbio em{font-style:italic;color:#4f46e5;font-weight:500;}
+
+/* specialty cards */
+.specs{display:flex;flex-direction:column;gap:0.65rem;margin-bottom:1.8rem;animation:fromLeft 0.7s 0.4s ease both;}
+.spec{
+  display:flex;align-items:center;gap:1rem;
+  padding:0.85rem 1.2rem;
+  background:rgba(255,255,255,0.75);
+  border:1px solid rgba(255,255,255,0.9);
+  border-radius:12px;backdrop-filter:blur(8px);
+  box-shadow:0 2px 12px rgba(0,0,0,0.05);
+  transition:all 0.25s;
+}
+.spec:hover{background:rgba(255,255,255,0.95);box-shadow:0 4px 20px rgba(0,0,0,0.09);transform:translateX(4px);}
+.spec-ico{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.05rem;font-weight:700;font-family:'Cormorant Garamond',serif;flex-shrink:0;
+}
+.stitle{font-size:0.87rem;font-weight:700;color:#1a1614;}
+.ssub{font-size:0.72rem;color:#6b6358;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;}
+
+.hloc{
+  font-size:0.8rem;color:#8a8078;margin-bottom:1.8rem;
+  display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;
+  animation:fromLeft 0.7s 0.5s ease both;
+}
+.lsep{color:#c8c0b8;}
+
+/* buttons */
+.hbtns{display:flex;gap:0.8rem;flex-wrap:wrap;animation:fromLeft 0.7s 0.6s ease both;}
+.hbtn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.83rem;font-weight:700;letter-spacing:0.04em;
+  padding:0.8rem 1.6rem;border-radius:10px;cursor:pointer;text-decoration:none;transition:all 0.25s;
+}
+.hbtn-fill{
+  background:linear-gradient(135deg,#4f46e5,#0284c7);color:#fff;
+  box-shadow:0 4px 18px rgba(79,70,229,0.3);
+}
+.hbtn-fill:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,70,229,0.4);}
+.hbtn-out{
+  background:rgba(255,255,255,0.85);border:2px solid #c7d2fe;
+  color:#4f46e5;backdrop-filter:blur(8px);
+}
+.hbtn-out:hover{border-color:#4f46e5;background:#eef0ff;}
+.hbtn-ghost{background:transparent;color:#6b6358;}
+.hbtn-ghost:hover{color:#4f46e5;}
+
+@keyframes fromLeft{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+
+/* ══════════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════════ */
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:3rem;align-items:start;}
+.prose p{font-size:0.97rem;line-height:1.85;color:var(--mut);margin-bottom:1rem;transition:color 0.4s;}
+.prose strong{color:var(--acc);font-weight:600;}
+.timeline{position:relative;padding-left:1.8rem;}
+.timeline::before{
+  content:'';position:absolute;left:0;top:6px;bottom:0;
+  width:2px;background:linear-gradient(to bottom,var(--acc),transparent);
+  border-radius:2px;transition:background 0.4s;
+}
+.tli{position:relative;padding-bottom:2rem;}
+.tld{
+  position:absolute;left:-2.25rem;top:4px;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--surf);border:2px solid var(--acc);transition:all 0.4s;
+}
+.tly{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--acc);letter-spacing:0.1em;margin-bottom:0.2rem;transition:color 0.4s;}
+.tldg{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--txt);margin-bottom:0.12rem;transition:color 0.4s;}
+.tlins{font-size:0.84rem;color:var(--mut);transition:color 0.4s;}
+.chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
+.chip{
+  font-size:0.76rem;font-weight:500;padding:0.32rem 0.9rem;
+  border-radius:2rem;background:var(--tag);color:var(--tagt);
+  border:1px solid var(--brd);cursor:default;transition:all 0.3s;
+}
+.chip:hover{background:var(--acc);color:#fff;border-color:var(--acc);}
+
+/* ══════════════════════════════════════
+   RESEARCH PAGE
+══════════════════════════════════════ */
+.pub-tabs{
+  display:flex;border-bottom:2px solid var(--brd);
+  margin-bottom:2.5rem;transition:border-color 0.4s;
+}
+.pub-tab{
+  font-size:0.77rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;
+  color:var(--fnt);padding:0.8rem 1.4rem;cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s;
+}
+.pub-tab:hover{color:var(--acc);}
+.pub-tab.active{color:var(--acc);border-bottom-color:var(--acc);}
+.pub-sec{display:none;flex-direction:column;gap:1.2rem;}
+.pub-sec.active{display:flex;}
+.pub-card{
+  background:var(--surf);border:1px solid var(--brd);
+  border-radius:12px;padding:1.6rem 1.8rem;
+  position:relative;overflow:hidden;transition:all 0.25s;
+}
+.pub-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:var(--acc);border-radius:4px 0 0 4px;
+  transform:scaleY(0);transition:transform 0.25s;
+}
+.pub-card:hover::before{transform:scaleY(1);}
+.pub-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.07);transform:translateX(4px);}
+.pub-num{font-family:'JetBrains Mono',monospace;font-size:0.67rem;letter-spacing:0.12em;color:var(--acc);text-transform:uppercase;margin-bottom:0.5rem;transition:color 0.4s;}
+.pub-title{font-size:0.97rem;font-weight:600;color:var(--txt);line-height:1.55;margin-bottom:0.4rem;transition:color 0.4s;}
+.pub-auth{font-size:0.82rem;color:var(--mut);font-style:italic;margin-bottom:0.35rem;transition:color 0.4s;}
+.pub-venue{font-size:0.82rem;color:var(--fnt);margin-bottom:0.5rem;transition:color 0.4s;}
+.pub-doi{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--acc2);text-decoration:none;word-break:break-all;transition:color 0.4s;}
+.pub-doi:hover{text-decoration:underline;}
+.pub-badge{
+  display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;
+  text-transform:uppercase;padding:0.22rem 0.7rem;border-radius:2rem;
+  background:var(--tag);color:var(--tagt);margin-top:0.5rem;transition:all 0.4s;
+}
+
+/* ══════════════════════════════════════
+   SKILLS PAGE
+══════════════════════════════════════ */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem;}
+.skill-card{
+  background:var(--surf);border:1px solid var(--brd);
+  border-radius:14px;padding:1.8rem;transition:all 0.3s;
+}
+.skill-card:hover{border-color:var(--acc);box-shadow:0 6px 24px rgba(0,0,0,0.07);transform:translateY(-3px);}
+.sk-ico{font-size:1.8rem;margin-bottom:0.8rem;display:block;}
+.skill-card h3{font-size:0.77rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--acc);margin-bottom:1.2rem;transition:color 0.4s;}
+.sk-item{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:0.87rem;color:var(--mut);padding:0.42rem 0;
+  border-bottom:1px solid var(--brd);transition:color 0.4s,border-color 0.4s;
+}
+.sk-item:last-child{border-bottom:none;}
+.bw{width:72px;height:4px;background:var(--bg2);border-radius:4px;overflow:hidden;transition:background 0.4s;}
+.bar{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:4px;transition:background 0.4s;}
+.teach-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+.tc{background:var(--surf);border:1px solid var(--brd);border-radius:12px;padding:1.5rem 1.8rem;transition:all 0.4s;}
+.tc:hover{border-color:var(--acc);box-shadow:0 4px 16px rgba(0,0,0,0.06);}
+.tc h3{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:var(--txt);margin-bottom:0.25rem;transition:color 0.4s;}
+.tc-per{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--acc);letter-spacing:0.08em;margin-bottom:0.8rem;transition:color 0.4s;}
+.tc ul{list-style:none;display:flex;flex-direction:column;gap:0.35rem;}
+.tc li{font-size:0.85rem;color:var(--mut);display:flex;align-items:center;gap:0.5rem;transition:color 0.4s;}
+.tc li::before{content:'›';color:var(--acc);font-weight:700;transition:color 0.4s;}
+
+/* ══════════════════════════════════════
+   ACHIEVEMENTS PAGE
+══════════════════════════════════════ */
+.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.ach-card{
+  background:var(--surf);border:1px solid var(--brd);border-radius:14px;
+  padding:1.8rem 2rem;display:flex;gap:1.4rem;align-items:flex-start;transition:all 0.3s;
+}
+.ach-card:hover{border-color:var(--acc);box-shadow:0 6px 28px rgba(0,0,0,0.08);transform:translateY(-3px);}
+.ach-ico{width:58px;height:58px;border-radius:14px;background:var(--acl);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;transition:background 0.4s;}
+.ach-body h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--txt);margin-bottom:0.25rem;transition:color 0.4s;}
+.ach-rank{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--acc);line-height:1;transition:color 0.4s;}
+.ach-body p{font-size:0.84rem;color:var(--mut);line-height:1.6;transition:color 0.4s;}
+.ach-yr{font-family:'JetBrains Mono',monospace;font-size:0.69rem;letter-spacing:0.1em;color:var(--acc);display:block;margin-bottom:0.25rem;transition:color 0.4s;}
+.ach-banner{
+  background:var(--acl);border:1px solid var(--brd);border-radius:14px;
+  padding:2rem 2.2rem;grid-column:1/-1;
+  display:flex;align-items:center;gap:2rem;transition:all 0.4s;
+}
+.ach-banner:hover{border-color:var(--acc);box-shadow:0 4px 20px rgba(0,0,0,0.07);}
+.ab-ico{font-size:3rem;flex-shrink:0;}
+.ach-banner h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--txt);margin-bottom:0.4rem;transition:color 0.4s;}
+.ach-banner p{font-size:0.87rem;color:var(--mut);line-height:1.7;transition:color 0.4s;}
+
+/* ══════════════════════════════════════
+   CONTACT PAGE
+══════════════════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start;}
+.c-intro{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-style:italic;color:var(--txt);line-height:1.5;margin-bottom:1.4rem;transition:color 0.4s;}
+.c-body{font-size:0.94rem;color:var(--mut);line-height:1.8;margin-bottom:2rem;transition:color 0.4s;}
+.clink{
+  display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;
+  background:var(--surf);border:1px solid var(--brd);border-radius:12px;
+  text-decoration:none;margin-bottom:0.9rem;transition:all 0.25s;
+}
+.clink:hover{border-color:var(--acc);box-shadow:0 4px 16px rgba(0,0,0,0.07);transform:translateX(5px);}
+.cl-ico{width:40px;height:40px;border-radius:10px;background:var(--acl);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:background 0.4s;}
+.cl-lbl{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--fnt);margin-bottom:0.12rem;display:block;transition:color 0.4s;}
+.cl-val{font-size:0.9rem;font-weight:600;color:var(--txt);transition:color 0.4s;}
+.iblock{background:var(--surf);border:1px solid var(--brd);border-radius:14px;padding:1.8rem 2rem;transition:all 0.4s;}
+.iblock h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;color:var(--txt);margin-bottom:1.2rem;transition:color 0.4s;}
+.av-pill{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--acl);border:1px solid var(--brd);border-radius:2rem;
+  padding:0.5rem 1.2rem;font-size:0.8rem;font-weight:600;color:var(--acc);
+  margin-top:1.2rem;transition:all 0.4s;
+}
+.dg{color:#22c55e;font-size:0.6rem;}
+
+/* ══ FOOTER ══ */
+footer{
+  background:var(--bg2);border-top:1px solid var(--brd);
+  padding:2rem 2.5rem;text-align:center;font-size:0.76rem;
+  color:var(--fnt);font-family:'JetBrains Mono',monospace;
+  letter-spacing:0.05em;transition:all 0.4s;
+}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:960px){
+  .nav-links a{padding:0.3rem 0.55rem;font-size:0.7rem;}
+  .home-layout{grid-template-columns:1fr;gap:2.5rem;padding:2.5rem 1.5rem;}
+  .home-left{flex-direction:row;flex-wrap:wrap;justify-content:center;}
+}
+@media(max-width:768px){
+  nav{padding:0 1rem;}
+  .nav-links a{padding:0.28rem 0.45rem;font-size:0.64rem;}
+  .home-layout{grid-template-columns:1fr;padding:2rem 1.2rem;}
+  .home-left{flex-direction:column;align-items:center;}
+  .pills{grid-template-columns:1fr 1fr;}
+  .wrap{padding:3rem 1.5rem;}
+  .about-grid,.contact-grid,.ach-grid,.teach-grid{grid-template-columns:1fr;}
+  .ach-grid .ach-banner{grid-column:1;}
+  .ach-banner{flex-direction:column;}
+  .skills-grid{grid-template-columns:1fr;}
+  .specs{gap:0.5rem;}
+  .hbtns{flex-direction:column;}
+}
+</style>
+</head>
+<body data-page="home">
+
+<!-- ══ NAV ══ -->
+<nav>
+  <span class="nav-logo" onclick="showPage('home')">
+    <img src="DG.jpg" alt="DG" onerror="this.style.display='none'">
+    DG
+  </span>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" data-page="home" class="active">Home</a></li>
+    <li><a onclick="showPage('about')" data-page="about">About</a></li>
+    <li><a onclick="showPage('research')" data-page="research">Research</a></li>
+    <li><a onclick="showPage('skills')" data-page="skills">Skills</a></li>
+    <li><a onclick="showPage('achievements')" data-page="achievements">Achievements</a></li>
+    <li><a onclick="showPage('contact')" data-page="contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HOME
+══════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="home-root">
+
+   
+    <!-- Main layout -->
+    <div class="home-layout">
+
+      <!-- LEFT: Photo + stats -->
+      <div class="home-left">
+        <div class="photo-wrap">
+          <div class="photo-halo"></div>
+          <div class="photo-box">
+            <img src="DG.jpg" alt="Debojyoti Ghosh"
+              onerror="this.style.display='none';document.getElementById('ph-fb').style.display='flex'">
+            <div id="ph-fb" class="photo-fallback" style="display:none">DG</div>
+          </div>
+          <div class="photo-badge">
+            <span class="pulse"></span>
+            PhD Researcher · IIT Kharagpur
+          </div>
+        </div>
+
+        <div class="pills">
+          <div class="pill pi"><span class="pn">5</span><span class="pl">Published</span></div>
+          <div class="pill pb"><span class="pn">5</span><span class="pl">Under Review</span></div>
+          <div class="pill pp"><span class="pn">AIR&nbsp;13</span><span class="pl">CSIR-JRF</span></div>
+          <div class="pill pg"><span class="pn">6+</span><span class="pl">Yrs Research</span></div>
+        </div>
+
+        <div class="dtags">
+          <span class="dt dt-ml">Machine Learning</span>
+          <span class="dt dt-cv">Computer Vision</span>
+          <span class="dt dt-dl">Deep Learning</span>
+          <span class="dt dt-kg">Knowledge Graphs</span>
+          <span class="dt dt-sc">Supply Chain AI</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Text -->
+      <div class="home-right">
+        <div class="eyebrow">
+          <span class="ebline"></span>
+          <span class="ebtext">IIT Kharagpur · Thesis Submitted Feb 2026</span>
+        </div>
+
+        <h1 class="hname">
+          <span class="nfirst">Debojyoti Ghosh</span>
+        </h1>
+
+        <p class="htagline">AI Researcher · Computer Vision · Sustainability</p>
+
+        <p class="hbio">
+          Building intelligent systems that create real-world impact — from
+          <em>smart waste classification</em> using Vision Transformers to
+          <em>knowledge-graph-driven demand forecasting</em>. My research lives at
+          the intersection of deep learning, sustainability, and mathematical rigour.
+        </p>
+
+        <div class="specs">
+          <div class="spec">
+            <div class="spec-ico" style="background:#eef0ff;color:#4f46e5;font-size:1.2rem">∇</div>
+            <div><div class="stitle">Deep Learning</div><div class="ssub">ViT · CNN · SNN · Diffusion Models</div></div>
+          </div>
+          <div class="spec">
+            <div class="spec-ico" style="background:#e0f2fe;color:#0284c7">👁</div>
+            <div><div class="stitle">Computer Vision</div><div class="ssub">Classification · Detection · Cross-modal Fusion</div></div>
+          </div>
+          <div class="spec">
+            <div class="spec-ico" style="background:#d1fae5;color:#059669">⬡</div>
+            <div><div class="stitle">Knowledge Graphs</div><div class="ssub">GNN · Semantic Augmentation · RAG</div></div>
+          </div>
+        </div>
+
+        <div class="hloc">
+          <span>📍 IIT Kharagpur, West Bengal, India</span>
+          <span class="lsep">·</span>
+          <span>✉ debojyoti07.dg@gmail.com</span>
+        </div>
+
+        <div class="hbtns">
+          <a class="hbtn hbtn-fill" onclick="showPage('research')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            View Research
+          </a>
+          <a class="hbtn hbtn-out" onclick="showPage('about')">About Me</a>
+          <a class="hbtn hbtn-ghost" onclick="showPage('contact')">Get in Touch →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════ -->
+<div id="page-about" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="lbl">Who I am</div>
+      <h2 class="htitle">About Me</h2>
+      <p class="hsub">Researcher, teacher, and builder — driven by the belief that AI should serve humanity and the planet.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="prose">
+          <p>My research journey has been driven by a desire to use <strong>Artificial Intelligence to create meaningful real-world impact</strong>. I am a PhD researcher at IIT Kharagpur, with my thesis submitted in February 2026, working at the intersection of AI, Computer Vision, and Sustainability.</p>
+          <p>A major part of my work focuses on <strong>intelligent waste classification</strong>, where I develop models that can accurately recognise waste to support efficient recycling and cleaner urban environments. The potential of AI to contribute to environmental sustainability continues to inspire my work.</p>
+          <p>With an academic background in mathematics and computer science, I enjoy connecting theoretical ideas with practical applications across <strong>waste management, supply chain optimisation, and demand forecasting</strong>.</p>
+          <p>I have published research in reputed journals and explored innovative models that combine deep learning with human insight. My teaching experience at IIT Kharagpur and NPTEL has strengthened my mentorship and collaboration skills.</p>
+          <p>I aspire to push the boundaries of AI to create technologies that are not only intelligent but also <strong>responsible, sustainable, and socially beneficial</strong>.</p>
+        </div>
+        <div style="margin-top:2rem">
+          <div class="lbl" style="margin-bottom:0.8rem">Research Interests</div>
+          <div class="chips">
+            <span class="chip">Machine Learning</span>
+            <span class="chip">Deep Learning</span>
+            <span class="chip">Computer Vision</span>
+            <span class="chip">Knowledge Graphs</span>
+            <span class="chip">Supply Chain Optimisation</span>
+            <span class="chip">Demand Forecasting</span>
+            <span class="chip">Inventory Modelling</span>
+            <span class="chip">Waste Management AI</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:1.5rem">
+          <div class="lbl" style="margin-bottom:1.2rem">Education</div>
+          <div class="timeline">
+            <div class="tli"><div class="tld"></div><div class="tly">Feb 2026</div><div class="tldg">Ph.D. (Thesis Submitted)</div><div class="tlins">IIT Kharagpur</div></div>
+            <div class="tli"><div class="tld"></div><div class="tly">2020</div><div class="tldg">M.Tech. — CS &amp; Data Processing</div><div class="tlins">IIT Kharagpur</div></div>
+            <div class="tli"><div class="tld"></div><div class="tly">2017</div><div class="tldg">M.Sc. — Applied Mathematics</div><div class="tlins">Vidyasagar University</div></div>
+            <div class="tli" style="padding-bottom:0"><div class="tld"></div><div class="tly">2015</div><div class="tldg">B.Sc. — Mathematics</div><div class="tlins">Vidyasagar University</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="lbl" style="margin-bottom:1rem">Personal Details</div>
+          <div class="info-pair"><span class="ikey">Date of Birth</span><span class="ival">1 April 1995</span></div>
+          <div class="info-pair"><span class="ikey">Nationality</span><span class="ival">Indian</span></div>
+          <div class="info-pair"><span class="ikey">Location</span><span class="ival">Kharagpur, West Bengal</span></div>
+          <div class="info-pair"><span class="ikey">Status</span><span class="ival">PhD Candidate</span></div>
+          <div class="info-pair"><span class="ikey">Email</span><span class="ival">debojyoti07.dg@gmail.com</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     RESEARCH
+══════════════════════════════════════════ -->
+<div id="page-research" class="page">
+  <div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="lbl">Academic Output</div>
+    <h2 class="htitle">Research &amp; Publications</h2>
+    <p class="hsub">
+      5 published papers · 5 under review · 1 international conference presentation
+    </p>
+
+    <!-- 🔗 SMALL RESEARCH LINKS -->
+    <div class="hero-links">
+      
+      <a class="clink small" href="https://scholar.google.com/citations?user=Nv7ksq4AAAAJ&hl=en&oi=ao" target="_blank">
+        <div class="cl-ico">🎓</div>
+        <div>
+          <span class="cl-lbl">Google Scholar</span>
+          <span class="cl-val">Publications</span>
+        </div>
+      </a>
+
+      <a class="clink small" href="https://orcid.org/0000-0003-4211-7090" target="_blank">
+        <div class="cl-ico" style="background:#e6f7ed;color:#16a34a;">iD</div>
+        <div>
+          <span class="cl-lbl">ORCID</span>
+          <span class="cl-val">Research Profile</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+
+  <div class="wrap">
+    <div class="pub-tabs">
+      <div class="pub-tab active" onclick="switchTab('published',this)">Published (5)</div>
+      <div class="pub-tab" onclick="switchTab('review',this)">Under Review (5)</div>
+      <div class="pub-tab" onclick="switchTab('conf',this)">Conferences (1)</div>
+    </div>
+
+    <div class="pub-sec active" id="tab-published">
+      <div class="pub-card">
+        <div class="pub-num">01 · Information Fusion · 2026</div>
+        <div class="pub-title">Knowledge Graph-Augmented Stacking for Accurate Bike-Sharing Demand Forecasting: The RideGraph Framework</div>
+        <div class="pub-auth">D. Ghosh, R. Mitra, and A. Goswami</div>
+        <div class="pub-venue">Information Fusion, vol. 132, article 104216, 2026</div>
+        <a class="pub-doi" href="https://doi.org/10.1016/j.inffus.2026.104216" target="_blank">DOI: 10.1016/j.inffus.2026.104216</a>
+      </div>
+      <div class="pub-card">
+        <div class="pub-num">02 · Applied Soft Computing · 2026</div>
+        <div class="pub-title">Semantic-augmented Vision Transformer with Cross-modal Fusion for Waste Classification</div>
+        <div class="pub-auth">D. Ghosh and A. Goswami</div>
+        <div class="pub-venue">Applied Soft Computing, vol. 190, article 114602, 2026</div>
+        <a class="pub-doi" href="https://doi.org/10.1016/j.asoc.2026.114602" target="_blank">DOI: 10.1016/j.asoc.2026.114602</a>
+      </div>
+      <div class="pub-card">
+        <div class="pub-num">03 · Information Sciences · 2025</div>
+        <div class="pub-title">Enhanced Deep Learning Framework for Efficient Garbage Classification in Smart Waste Management Systems</div>
+        <div class="pub-auth">D. Ghosh and A. Goswami</div>
+        <div class="pub-venue">Information Sciences, vol. 719, article 122462, 2025</div>
+        <a class="pub-doi" href="https://doi.org/10.1016/j.ins.2025.122462" target="_blank">DOI: 10.1016/j.ins.2025.122462</a>
+      </div>
+      <div class="pub-card">
+        <div class="pub-num">04 · Journal of Industrial &amp; Management Optimisation · 2025</div>
+        <div class="pub-title">Integrating Imperfect Production, Screening Errors, Item Deterioration, Rising Transportation Costs, and Carbon Emissions for Sustainable Optimisation</div>
+        <div class="pub-auth">D. Ghosh, C. Rout, and A. Goswami</div>
+        <div class="pub-venue">JIMO, vol. 21, no. 3, pp. 2052–2073, 2025</div>
+        <a class="pub-doi" href="https://doi.org/10.3934/jimo.2024162" target="_blank">DOI: 10.3934/jimo.2024162</a>
+      </div>
+      <div class="pub-card">
+        <div class="pub-num">05 · Sādhana · 2024</div>
+        <div class="pub-title">A Model of an Integrated Supply Chain with Imperfect Production, Product Deterioration, and Quality Inspection Errors</div>
+        <div class="pub-auth">D. Ghosh, C. Rout, and A. Goswami</div>
+        <div class="pub-venue">Sādhana, vol. 49, no. 2, p. 187, 2024</div>
+        <a class="pub-doi" href="https://doi.org/10.1007/s12046-024-02502-2" target="_blank">DOI: 10.1007/s12046-024-02502-2</a>
+      </div>
+    </div>
+
+    <div class="pub-sec" id="tab-review">
+      <div class="pub-card">
+        <div class="pub-num">C1 · IEEE Transactions on Neural Networks and Learning Systems</div>
+        <div class="pub-title">QCARENet: Quantum QKV Attention with CSMA for Distributed Non-IID Visual Recognition</div>
+        <div class="pub-auth">D. Ghosh and A. Goswami</div>
+        <span class="pub-badge">Under Review</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-num">C2 · Computers &amp; Electrical Engineering</div>
+        <div class="pub-title">DiffSOMSpikeNet: A Deep Model with Differentiable Soft Self-Organizing Maps and Spiking Dynamics for Waste Classification</div>
+        <div class="pub-auth">D. Ghosh and A. Goswami</div>
+        <span class="pub-badge">Revised · Under Review</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-num">C3 · Applied Soft Computing</div>
+        <div class="pub-title">Adaptive Modular Retrieval-Augmented Framework for Cross-Domain Image Classification</div>
+        <div class="pub-auth">D. Ghosh, S. K. Ghosh, and A. Goswami</div>
+        <span class="pub-badge">Submitted</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-num">C4 · Engineering Applications of Artificial Intelligence</div>
+        <div class="pub-title">Context Aware Convolutional Neural Network Transformer Fusion with Gated Attention for Automated Waste Classification</div>
+        <div class="pub-auth">D. Ghosh and A. Goswami</div>
+        <span class="pub-badge">Submitted</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-num">C5 · Sādhana</div>
+        <div class="pub-title">Attention-Driven Garbage Classification for Waste Management using ResNet152 and Meta-Learning with Human-AI Collaboration</div>
+        <div class="pub-auth">D. Ghosh, R. Mitra, and A. Goswami</div>
+        <span class="pub-badge">Under Review</span>
+      </div>
+    </div>
+
+    <div class="pub-sec" id="tab-conf">
+      <div class="pub-card">
+        <div class="pub-num">P1 · Joint Mathematics Meetings 2025 · Seattle, USA</div>
+        <div class="pub-title">An Integrated Supply Chain Model for Deteriorating Inventory Incorporating Imperfections in Production and Quality Inspection Errors</div>
+        <div class="pub-auth">D. Ghosh, C. Rout, and A. Goswami</div>
+        <span class="pub-badge">🏛 JMM 2025 · Seattle, USA</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SKILLS & TEACHING
+══════════════════════════════════════════ -->
+<div id="page-skills" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="lbl">Capabilities</div>
+      <h2 class="htitle">Skills &amp; Teaching</h2>
+      <p class="hsub">Technical expertise, research skills, and years of hands-on teaching at IIT Kharagpur and NPTEL.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="skills-grid">
+      <div class="skill-card">
+        <span class="sk-ico">🖥️</span>
+        <h3>Programming</h3>
+        <div class="sk-item">Python <div class="bw"><div class="bar" style="width:95%"></div></div></div>
+        <div class="sk-item">C / C++ <div class="bw"><div class="bar" style="width:75%"></div></div></div>
+        <div class="sk-item">SQL <div class="bw"><div class="bar" style="width:70%"></div></div></div>
+        <div class="sk-item">MATLAB <div class="bw"><div class="bar" style="width:65%"></div></div></div>
+      </div>
+      <div class="skill-card">
+        <span class="sk-ico">⚙️</span>
+        <h3>Frameworks &amp; Tools</h3>
+        <div class="sk-item">PyTorch <div class="bw"><div class="bar" style="width:90%"></div></div></div>
+        <div class="sk-item">Scikit-learn <div class="bw"><div class="bar" style="width:85%"></div></div></div>
+        <div class="sk-item">LaTeX <div class="bw"><div class="bar" style="width:88%"></div></div></div>
+      </div>
+      <div class="skill-card">
+        <span class="sk-ico">🧠</span>
+        <h3>Research Skills</h3>
+        <div class="sk-item">Academic Writing <div class="bw"><div class="bar" style="width:92%"></div></div></div>
+        <div class="sk-item">Curriculum Design <div class="bw"><div class="bar" style="width:80%"></div></div></div>
+        <div class="sk-item">Mentoring <div class="bw"><div class="bar" style="width:85%"></div></div></div>
+        <div class="sk-item">Lab Instruction <div class="bw"><div class="bar" style="width:88%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="lbl" style="margin-bottom:1.5rem">Teaching Experience</div>
+    <div class="teach-grid">
+      <div class="tc">
+        <h3>Teaching Assistant — IIT Kharagpur</h3>
+        <div class="tc-per">PhD Period · 2022–2025</div>
+        <ul><li>Mathematics I &amp; II</li><li>DBMS &amp; Lab</li><li>OOP in Python &amp; Lab</li></ul>
+      </div>
+      <div class="tc">
+        <h3>Teaching Assistant — IIT Kharagpur</h3>
+        <div class="tc-per">M.Tech Period · 2019–2020</div>
+        <ul><li>System Programming Lab</li><li>Operating Systems Lab</li></ul>
+      </div>
+      <div class="tc" style="grid-column:1/-1">
+        <h3>Teaching Assistant — NPTEL</h3>
+        <div class="tc-per">2023 &amp; 2025</div>
+        <ul><li>Constrained and Unconstrained Optimisation</li></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ACHIEVEMENTS
+══════════════════════════════════════════ -->
+<div id="page-achievements" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="lbl">Honours &amp; Recognition</div>
+      <h2 class="htitle">Achievements</h2>
+      <p class="hsub">National-level competitive exam ranks, JRF fellowships, and international conference presentations.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="ach-grid">
+      <div class="ach-card">
+        <div class="ach-ico">🏆</div>
+        <div class="ach-body">
+          <span class="ach-yr">June 2018</span>
+          <div class="ach-rank">AIR 13</div>
+          <h3>CSIR-JRF Fellowship</h3>
+          <p>All India Rank 13 in CSIR-UGC NET (Mathematical Sciences) — securing the Junior Research Fellowship, one of India's most prestigious science fellowships.</p>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-ico">🥇</div>
+        <div class="ach-body">
+          <span class="ach-yr">December 2016</span>
+          <div class="ach-rank">AIR 42</div>
+          <h3>UGC-JRF Fellowship</h3>
+          <p>All India Rank 42 in CSIR-UGC NET (Mathematical Sciences) — Junior Research Fellowship awarded by the University Grants Commission.</p>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-ico">📊</div>
+        <div class="ach-body">
+          <span class="ach-yr">2017 &amp; 2018</span>
+          <div class="ach-rank" style="font-size:1.5rem">GATE</div>
+          <h3>GATE Mathematics Qualified</h3>
+          <p>Qualified the Graduate Aptitude Test in Engineering (Mathematics) in both 2017 and 2018, demonstrating consistent analytical excellence.</p>
+        </div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-ico">🎓</div>
+        <div class="ach-body">
+          <span class="ach-yr">2020 – 2026</span>
+          <div class="ach-rank" style="font-size:1.5rem">IIT KGP</div>
+          <h3>PhD at IIT Kharagpur</h3>
+          <p>Admitted to the PhD programme at IIT Kharagpur — one of India's premier institutions — with research in AI, Computer Vision, and Sustainability.</p>
+        </div>
+      </div>
+      <div class="ach-banner">
+        <div class="ab-ico">🌍</div>
+        <div>
+          <h3>International Conference — JMM 2025, Seattle USA</h3>
+          <p>Presented research at the <strong>Joint Mathematics Meetings (JMM) 2025</strong> in Seattle, USA — one of the world's largest mathematics conferences. Paper co-authored with C. Rout and A. Goswami on integrated supply chain models for deteriorating inventory incorporating production imperfections and quality inspection errors.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════ -->
+<div id="page-contact" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="lbl">Reach Out</div>
+      <h2 class="htitle">Get in Touch</h2>
+      <p class="hsub">Open to research collaborations, postdoctoral opportunities, and academic discussions.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <p class="c-intro">"Let's connect — whether it's research, collaboration, or a conversation about AI."</p>
+        <p class="c-body">If you're interested in my work on AI for sustainability, waste classification, supply chain optimisation, or any form of academic collaboration, feel free to reach out. References are available upon request.</p>
+
+        <a class="clink" href="mailto:debojyoti07.dg@gmail.com">
+          <div class="cl-ico">✉️</div>
+          <div><span class="cl-lbl">Email</span><span class="cl-val">debojyoti07.dg@gmail.com</span></div>
+        </a>
+        <a class="clink" href="tel:+917098933795">
+          <div class="cl-ico">📞</div>
+          <div><span class="cl-lbl">Phone</span><span class="cl-val">+91 70989 33795</span></div>
+        </a>
+        <a class="clink" href="https://scholar.google.com/citations?user=Nv7ksq4AAAAJ&hl=en&oi=ao" target="_blank">
+          <div class="cl-ico">🎓</div>
+          <div><span class="cl-lbl">Google Scholar</span><span class="cl-val">View All Publications</span></div>
+        </a>
+        <a class="clink" href="https://orcid.org/0000-0003-4211-7090" target="_blank">
+          <div class="cl-ico">🔗</div>
+          <div><span class="cl-lbl">ORCID</span><span class="cl-val">Researcher Profile</span></div>
+        </a>
+        <div class="av-pill"><span class="dg">●</span> Available for collaborations &amp; opportunities</div>
+      </div>
+
+      <div>
+        <div class="iblock" style="margin-bottom:1.2rem">
+          <h3>Location &amp; Details</h3>
+          <div class="info-pair"><span class="ikey">Institution</span><span class="ival">IIT Kharagpur</span></div>
+          <div class="info-pair"><span class="ikey">Address</span><span class="ival">Kharagpur, WB 721302</span></div>
+          <div class="info-pair"><span class="ikey">Country</span><span class="ival">India</span></div>
+          <div class="info-pair"><span class="ikey">Status</span><span class="ival">PhD Candidate (Thesis Submitted)</span></div>
+          <div class="info-pair"><span class="ikey">Open To</span><span class="ival">Postdoc · Research · Academia</span></div>
+        </div>
+        <div class="iblock" style="background:var(--acl)">
+          <h3>Quick Stats</h3>
+          <div class="info-pair"><span class="ikey">Publications</span><span class="ival" style="color:var(--acc);font-weight:700">5 published · 5 under review</span></div>
+          <div class="info-pair"><span class="ikey">Best Rank</span><span class="ival" style="color:var(--acc);font-weight:700">AIR 13 (CSIR-JRF)</span></div>
+          <div class="info-pair"><span class="ikey">Conference</span><span class="ival" style="color:var(--acc);font-weight:700">JMM 2025, Seattle USA</span></div>
+          <div class="info-pair"><span class="ikey">Teaching</span><span class="ival" style="color:var(--acc);font-weight:700">IIT KGP + NPTEL · 6+ yrs</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Debojyoti Ghosh &nbsp;·&nbsp; IIT Kharagpur &nbsp;·&nbsp; AI Researcher
+</footer>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const link = document.querySelector('.nav-links a[data-page="' + id + '"]');
+  if (link) link.classList.add('active');
+  document.body.setAttribute('data-page', id);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function switchTab(id, el) {
+  document.querySelectorAll('.pub-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.pub-sec').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+document.body.setAttribute('data-page', 'home');
+</script>
+</body>
+</html>
